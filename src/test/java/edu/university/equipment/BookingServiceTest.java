@@ -55,4 +55,34 @@ void rejectedOverCapacityRequestDoesNotCreateBooking() {
         service.getEquipment("PROJECTOR01").getAvailableQuantity()
     );
 }
+
+//Reject Negative Quantity
+@Test
+void negativeQuantityRejectedWithoutChangingInventory() {
+    int availableBefore =
+        service.getEquipment("LAPTOP01").getAvailableQuantity();
+
+    assertThrows(
+        IllegalArgumentException.class,
+        () -> service.create("STU1001", "LAPTOP01", -1)
+    );
+
+    assertEquals(
+        availableBefore,
+        service.getEquipment("LAPTOP01").getAvailableQuantity()
+    );
+}
+
+//Positive Quantity creates confirmed booking
+@Test
+void positiveQuantityCreatesConfirmedBooking() {
+    Booking booking = service.create("STU1001", "LAPTOP01", 2);
+
+    assertEquals("CONFIRMED", booking.getStatus());
+    assertEquals(2, booking.getQuantity());
+    assertEquals(
+        8,
+        service.getEquipment("LAPTOP01").getAvailableQuantity()
+    );
+}
 }
