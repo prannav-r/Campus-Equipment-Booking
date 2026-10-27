@@ -114,3 +114,4 @@ kubectl get pods
 Jenkins is configured to run the CI pipeline when GitHub sends a push webhook notification. The pipeline checks Java and Maven, runs tests, packages the application, and builds the Docker image.
 
 The Jenkins webhook uses a temporary ngrok HTTPS endpoint for local development. The ngrok tunnel must remain active for webhook notifications to reach Jenkins.
+
