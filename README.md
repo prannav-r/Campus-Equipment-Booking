@@ -16,3 +16,5 @@ Java 17 / Spring Boot REST API for a CI/CD lab assessment.
 - `GET /actuator/health`
 
 Inventory is in memory and resets on restart. No database is required.
+
+CI pipeline is triggered automatically through GitHub Webhooks.
